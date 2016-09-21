@@ -129,6 +129,10 @@ didDisconnectWithUser:(GIDGoogleUser *)user
     NSLog(@"%@ has signed out", user.profile.name);
 }
 
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    NSLog(@"Message ID: %@", userInfo[@"gcm.message_id"]);
+    NSLog(@"%@", userInfo);
+}
 
 
 

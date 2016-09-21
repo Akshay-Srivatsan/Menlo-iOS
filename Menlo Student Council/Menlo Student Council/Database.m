@@ -103,6 +103,7 @@ static NSString *token = nil;
     return;
 }
 
+
 + (void)pushDictionary:(NSDictionary *)data atPath:(NSString *)path withHandler:(void(^)(NSDictionary *json))handler {
     if (token == nil) {
         // Can't do anything until the authorization token arrives.
@@ -115,6 +116,33 @@ static NSString *token = nil;
     [request setHTTPMethod:@"POST"];
     
     NSData *dataObject = [NSJSONSerialization dataWithJSONObject:data options:0 error:nil];
+    [request setHTTPBody:dataObject];
+    
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+        handler(json);
+        
+    }];
+    
+    [task resume];
+    
+    return;
+}
+
+
++ (void)pushString:(NSString *)string atPath:(NSString *)path withHandler:(void(^)(NSDictionary *json))handler {
+    if (token == nil) {
+        // Can't do anything until the authorization token arrives.
+        return;
+    }
+    
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@.json?auth=%@", databasePath, path, token]];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [request setHTTPMethod:@"POST"];
+    
+    NSData *dataObject = [NSJSONSerialization dataWithJSONObject:string options:0 error:nil];
     [request setHTTPBody:dataObject];
     
     NSURLSession *session = [NSURLSession sharedSession];

@@ -17,15 +17,31 @@ static NSDictionary *authorization;
 static NSMutableArray<NSString *> *authorizedTopics;
 static NSMutableArray<NSString *> *admins;
 static NSMutableArray<NSString *> *topics;
-static NSDictionary<NSString *, NSDictionary<NSString *, NSString *> *> *users;
+static NSDictionary<NSString *, NSDictionary<NSString *, id> *> *users;
 
 static NSString *email;
 static NSString *displayName;
 static NSString *uid;
 static bool isAdmin;
+static NSMutableArray<NSString *>*subscribedTopics;
 
 
 + (void)initializeApp {
+    
+    
+    /*
+     Register for notifications
+     */
+    UIUserNotificationType allNotificationTypes = (UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge);
+    UIUserNotificationSettings *settings =
+    [UIUserNotificationSettings settingsForTypes:allNotificationTypes categories:nil];
+    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    [[UIApplication sharedApplication] registerForRemoteNotifications];
+    
+    /*
+     Get all the data.
+     */
+    
     uid = [[FIRAuth auth] currentUser].uid;
     email = [[FIRAuth auth] currentUser].email;
     displayName = [[FIRAuth auth] currentUser].displayName;
@@ -74,6 +90,21 @@ static bool isAdmin;
                         }
                         users = json;
                         
+                        
+                        [[FIRMessaging messaging] connectWithCompletion:^(NSError * _Nullable error) {
+                            NSLog(@"FIRMessaging Error: %@", error);
+                        }];
+                        
+                        subscribedTopics = [[NSMutableArray alloc] init];
+                        [MenloAppMain subscribeToTopic:@"developer_override"];
+                        
+                        for (NSString *key in users[uid][@"topics"]) {
+                            if ([((NSNumber *)(users[uid][@"topics"][key])) boolValue]) {
+                                [MenloAppMain subscribeToTopic:key];
+                                NSLog(@"!@#$%%^&*()  %@", key);
+                            }
+                        }
+                        
                     }];
                 }];
             }];
@@ -81,14 +112,6 @@ static bool isAdmin;
         }];
     }];
     
-    /*
-     Register for notifications
-     */
-    UIUserNotificationType allNotificationTypes = (UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge);
-    UIUserNotificationSettings *settings =
-    [UIUserNotificationSettings settingsForTypes:allNotificationTypes categories:nil];
-    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
-    [[UIApplication sharedApplication] registerForRemoteNotifications];
 }
 
 + (NSString *)getUserNameForId:(NSString *)uid {
@@ -99,9 +122,41 @@ static bool isAdmin;
     return uid;
 }
 
++ (NSString *)getEmail {
+    return email;
+}
+
 + (NSArray<NSString *> *)getAuthorizedTopics {
     NSLog(@"Authorized: %@", authorizedTopics);
     return authorizedTopics;
+}
+
++ (NSArray<NSString *> *)getTopics {
+    return topics;
+}
+
++ (void)subscribeToTopic:(NSString *)topic {
+    [[FIRMessaging messaging] subscribeToTopic:[NSString stringWithFormat:@"/topics/%@", topic]];
+    [subscribedTopics addObject:topic];
+    NSLog(@"%@", subscribedTopics);
+    NSData *data = [[[NSNumber numberWithBool:YES] stringValue] dataUsingEncoding:NSUTF8StringEncoding];
+    [Database putData:data atPath:[NSString stringWithFormat:@"/users/%@/topics/%@", uid, topic] withHandler:^(NSDictionary *json) {
+        
+    }];
+}
+
++ (void)unsubscribeFromTopic:(NSString *)topic {
+    [[FIRMessaging messaging] unsubscribeFromTopic:[NSString stringWithFormat:@"/topics/%@", topic]];
+    [subscribedTopics removeObject:topic];
+    NSLog(@"%@", subscribedTopics);
+    NSData *data = [[[NSNumber numberWithBool:NO] stringValue] dataUsingEncoding:NSUTF8StringEncoding];
+    [Database putData:data atPath:[NSString stringWithFormat:@"/users/%@/topics/%@", uid, topic] withHandler:^(NSDictionary *json) {
+        
+    }];
+}
+
++ (BOOL)isSubscribedToTopic:(NSString *)topic {
+    return [subscribedTopics containsObject:topic];
 }
 
 @end

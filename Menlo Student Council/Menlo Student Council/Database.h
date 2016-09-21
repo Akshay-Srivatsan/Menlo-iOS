@@ -15,6 +15,7 @@
 + (void)putDictionary:(NSDictionary *)data atPath:(NSString *)path withHandler:(void(^)(NSDictionary *json))handler;
 + (void)putData:(NSData *)data atPath:(NSString *)path withHandler:(void(^)(NSDictionary *json))handler;
 + (void)pushDictionary:(NSDictionary *)data atPath:(NSString *)path withHandler:(void(^)(NSDictionary *json))handler;
++ (void)pushString:(NSString *)string atPath:(NSString *)path withHandler:(void(^)(NSDictionary *json))handler;
 + (void)deleteDataAtPath:(NSString *)path withHandler:(void(^)(NSDictionary *json))handler;
 + (void)deleteDictionaryAtPath:(NSString *)path withHandler:(void(^)(NSDictionary *json))handler;
 

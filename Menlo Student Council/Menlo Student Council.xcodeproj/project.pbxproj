@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		1B0FC3F50C67584F5492D132 /* libPods-Menlo Student Council.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 772BF5CCBE839CE7785A88CB /* libPods-Menlo Student Council.a */; };
 		BA1C1A511D5BC26A004E6A78 /* PostEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA1C1A501D5BC26A004E6A78 /* PostEditViewController.m */; };
+		BA252E1A1D925C6200E48876 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA252E181D925C6200E48876 /* Settings.storyboard */; };
+		BA252E1E1D925D3300E48876 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA252E1D1D925D3300E48876 /* SettingsViewController.m */; };
 		BA8BF9151D56F79E00F574C6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BA8BF9141D56F79E00F574C6 /* main.m */; };
 		BA8BF9181D56F79E00F574C6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BA8BF9171D56F79E00F574C6 /* AppDelegate.m */; };
 		BA8BF91B1D56F79E00F574C6 /* PostsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA8BF91A1D56F79E00F574C6 /* PostsListViewController.m */; };
@@ -36,6 +38,9 @@
 		772BF5CCBE839CE7785A88CB /* libPods-Menlo Student Council.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Menlo Student Council.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA1C1A4F1D5BC26A004E6A78 /* PostEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostEditViewController.h; sourceTree = "<group>"; };
 		BA1C1A501D5BC26A004E6A78 /* PostEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostEditViewController.m; sourceTree = "<group>"; };
+		BA252E191D925C6200E48876 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
+		BA252E1C1D925D3300E48876 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		BA252E1D1D925D3300E48876 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		BA8BF9101D56F79E00F574C6 /* Menlo Student Council.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Menlo Student Council.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA8BF9141D56F79E00F574C6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		BA8BF9161D56F79E00F574C6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -95,6 +100,16 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		BA252E1B1D925C7600E48876 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				BA252E181D925C6200E48876 /* Settings.storyboard */,
+				BA252E1C1D925D3300E48876 /* SettingsViewController.h */,
+				BA252E1D1D925D3300E48876 /* SettingsViewController.m */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
 		BA8BF9071D56F79E00F574C6 = {
 			isa = PBXGroup;
 			children = (
@@ -119,6 +134,7 @@
 				BAF95D111D596EE6002C14C3 /* GoogleService-Info.plist */,
 				BA8BF9161D56F79E00F574C6 /* AppDelegate.h */,
 				BA8BF9171D56F79E00F574C6 /* AppDelegate.m */,
+				BA252E1B1D925C7600E48876 /* Settings */,
 				BA97CF2C1D5E8B64000DF0C7 /* Main */,
 				BAF95D171D5975B5002C14C3 /* Posts */,
 				BAF03F361D6BD21700BFA293 /* Suggestions */,
@@ -271,6 +287,7 @@
 				BAF95D121D596EE6002C14C3 /* GoogleService-Info.plist in Resources */,
 				BA8BF9231D56F79E00F574C6 /* Assets.xcassets in Resources */,
 				BA8BF9211D56F79E00F574C6 /* Main.storyboard in Resources */,
+				BA252E1A1D925C6200E48876 /* Settings.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,6 +349,7 @@
 				BABFD1E91D57FB7B00778A76 /* SignInViewController.m in Sources */,
 				BAF95D1D1D59861A002C14C3 /* PostDetailViewController.m in Sources */,
 				BA8BF91E1D56F79E00F574C6 /* SecondViewController.m in Sources */,
+				BA252E1E1D925D3300E48876 /* SettingsViewController.m in Sources */,
 				BAF95D0D1D58581D002C14C3 /* Database.m in Sources */,
 				BAF03F3C1D6BE45500BFA293 /* SuggestionDetailViewController.m in Sources */,
 				BA8BF9181D56F79E00F574C6 /* AppDelegate.m in Sources */,
@@ -350,6 +368,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		BA252E181D925C6200E48876 /* Settings.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BA252E191D925C6200E48876 /* Base */,
+			);
+			name = Settings.storyboard;
+			sourceTree = "<group>";
+		};
 		BA8BF91F1D56F79E00F574C6 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

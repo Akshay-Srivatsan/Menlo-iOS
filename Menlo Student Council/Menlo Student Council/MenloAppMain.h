@@ -14,6 +14,11 @@
 
 + (NSString *)getUserNameForId:(NSString *)uid;
 + (NSString *)getUserId;
++ (NSString *)getEmail;
 + (NSArray<NSString *> *)getAuthorizedTopics;
++ (NSArray<NSString *> *)getTopics;
++ (void)subscribeToTopic:(NSString *)topic;
++ (void)unsubscribeFromTopic:(NSString *)topic;
++ (BOOL)isSubscribedToTopic:(NSString *)topic;
 
 @end
