@@ -20,4 +20,6 @@
 + (void)deleteDictionaryAtPath:(NSString *)path withHandler:(void(^)(NSDictionary *json))handler;
 
 + (NSDictionary *) getDatabaseTimestamp;
+
++ (void)updateNotifications;
 @end

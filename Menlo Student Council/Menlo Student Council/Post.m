@@ -51,7 +51,7 @@
     if (self.postId == nil) {
         data[@"timestamp"] = [Database getDatabaseTimestamp];
         [Database pushDictionary:data atPath:@"posts" withHandler:^(NSDictionary *json) {
-            
+            [Database updateNotifications];
         }];
     } else {
         [Database putDictionary:data atPath:[@"posts/" stringByAppendingString:self.postId] withHandler:^(NSDictionary *json) {

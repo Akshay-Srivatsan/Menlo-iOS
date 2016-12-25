@@ -190,5 +190,17 @@ static NSString *token = nil;
     return [FIRServerValue timestamp];
 }
 
++ (void)updateNotifications {
+    NSURL *url = [NSURL URLWithString:@"https://worker-aws-us-east-1.iron.io:443/2/projects/585c42c96bf1240007897ea4/tasks/webhook?code_name=Menlo+Student+Council+App&oauth=aTjV26fX2WbiFXDAr1wW"];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [request setHTTPMethod:@"POST"];
+    
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request];
+    
+    [task resume];
+}
+
 
 @end
